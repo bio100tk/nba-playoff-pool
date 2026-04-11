@@ -6,7 +6,7 @@ import { supabase } from "@/lib/supabase";
 type Team = {
   id: number;
   conference: "East" | "West";
-  seed: number;
+  seed: number | null;
   name: string;
   abbreviation: string;
   logo_url: string;
@@ -76,14 +76,12 @@ function toBracketTeam(team?: Team | null): BracketTeam {
 }
 
 function pairMatchups(teams: Team[]) {
-  const ordered = [...teams].sort((a, b) => a.seed - b.seed);
-
   return [
-    [ordered[0], ordered[7]],
-    [ordered[3], ordered[4]],
-    [ordered[2], ordered[5]],
-    [ordered[1], ordered[6]],
-  ] as Array<[Team | undefined, Team | undefined]>;
+    [teams[0], teams[7]],
+    [teams[3], teams[4]],
+    [teams[2], teams[5]],
+    [teams[1], teams[6]],
+  ].filter(([a, b]) => a && b) as [Team, Team][];
 }
 
 function winnerOf(
@@ -105,7 +103,7 @@ function buildConferenceBracket(
   teams: Team[],
   picks: Record<string, Pick>
 ): BracketSide {
-  const ordered = [...teams].sort((a, b) => a.seed - b.seed);
+  const ordered = [...teams];
   const getTeam = (index: number) => toBracketTeam(ordered[index]);
 
   const round1: SeriesDef[] = [
