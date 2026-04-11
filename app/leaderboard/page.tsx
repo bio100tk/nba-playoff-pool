@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { unstable_noStore as noStore } from "next/cache";
 import { supabase } from "@/lib/supabase";
 
 type LeaderboardRow = {
@@ -7,6 +8,8 @@ type LeaderboardRow = {
 };
 
 export default async function LeaderboardPage() {
+  noStore();
+
   const { data, error } = await supabase
     .from("leaderboard")
     .select("*")
