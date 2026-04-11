@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { unstable_noStore as noStore } from "next/cache";
 import { supabase } from "@/lib/supabase";
+import SiteNav from "../components/SiteNav";
 
 type LeaderboardRow = {
   competitor_name: string;
@@ -36,21 +37,14 @@ export default async function LeaderboardPage() {
   return (
     <main className="min-h-screen bg-white p-6">
       <div className="mx-auto max-w-4xl">
-        <div className="mb-6 flex items-center justify-between gap-4">
-          <div>
-            <h1 className="text-3xl font-bold">Leaderboard</h1>
-            <p className="mt-1 text-sm text-slate-600">
-              Lower score is better. The score is based on squared error.
-            </p>
-          </div>
+        <div className="mb-6">
+         <h1 className="text-3xl font-bold">Leaderboard</h1>
+         <p className="mt-1 text-sm text-slate-600">
+            Lower score is better. The score is based on squared error.
+         </p>
+         </div>
 
-          <Link
-            href="/"
-            className="rounded-lg border px-4 py-2 text-sm font-medium hover:bg-slate-50"
-          >
-            Back to bracket
-          </Link>
-        </div>
+         <SiteNav />
 
         <div className="overflow-hidden rounded-3xl border">
           <table className="w-full border-collapse">

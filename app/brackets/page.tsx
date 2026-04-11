@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { supabase } from "@/lib/supabase";
 import { unstable_noStore as noStore } from "next/cache";
+import SiteNav from "../components/SiteNav";
 
 type PredictionRow = {
   competitor_name: string;
@@ -111,21 +112,14 @@ export default async function BracketsPage({
   return (
     <main className="min-h-screen bg-white p-6">
       <div className="mx-auto max-w-5xl">
-        <div className="mb-6 flex items-center justify-between gap-4">
-          <div>
-            <h1 className="text-3xl font-bold">View Brackets</h1>
-            <p className="mt-1 text-sm text-slate-600">
-              Select a competitor to view their saved bracket.
-            </p>
-          </div>
+        <div className="mb-6">
+        <h1 className="text-3xl font-bold">View Brackets</h1>
+        <p className="mt-1 text-sm text-slate-600">
+           Select a competitor to view their saved bracket.
+        </p>
+      </div>
 
-          <Link
-            href="/"
-            className="rounded-lg border px-4 py-2 text-sm font-medium hover:bg-slate-50"
-          >
-            Back to bracket
-          </Link>
-        </div>
+<SiteNav />
 
         <form method="GET" className="mb-8 flex flex-wrap items-end gap-3">
           <div>

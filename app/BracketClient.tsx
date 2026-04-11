@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { supabase } from "@/lib/supabase";
+import SiteNav from "./components/SiteNav";
 
 type Team = {
   id: number;
@@ -467,7 +468,7 @@ function handleChange(seriesKey: string, wins1: number, wins2: number) {
         <p className="mb-6 text-sm text-slate-600">
           Enter a 4-win result in Round 1 to reveal the next round automatically.
         </p>
-
+        <SiteNav />
         <input
           placeholder="Your name"
           value={competitorName}
