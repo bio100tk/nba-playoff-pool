@@ -18,6 +18,7 @@ type BracketTeam = {
   abbreviation: string;
   logo_url: string;
   seed: number | null;
+  conference: "East" | "West" | null;
 };
 
 type Pick = {
@@ -45,6 +46,7 @@ const TBD: BracketTeam = {
   abbreviation: "",
   logo_url: "",
   seed: null,
+  conference: null,
 };
 
 const DEPENDENCIES: Record<string, string[]> = {
@@ -73,6 +75,7 @@ function toBracketTeam(team?: Team | null): BracketTeam {
     abbreviation: team.abbreviation,
     logo_url: team.logo_url,
     seed: team.seed,
+    conference: team.conference,
   };
 }
 
@@ -428,18 +431,22 @@ function handleChange(seriesKey: string, wins1: number, wins2: number) {
       return;
     }
 
-    const rows = allSeries.map((series) => {
-      const pick = picks[series.key]!;
+const rows = allSeries.map((series) => {
+  const pick = picks[series.key]!;
 
-      return {
-        competitor_name: trimmedName,
-        series_key: series.key,
-        team1_name: series.team1.name,
-        team2_name: series.team2.name,
-        predicted_team1_wins: pick.wins1,
-        predicted_team2_wins: pick.wins2,
-      };
-    });
+  return {
+    competitor_name: trimmedName,
+    series_key: series.key,
+    team1_name: series.team1.name,
+    team2_name: series.team2.name,
+    team1_conference: series.team1.conference,
+    team2_conference: series.team2.conference,
+    team1_seed: series.team1.seed,
+    team2_seed: series.team2.seed,
+    predicted_team1_wins: pick.wins1,
+    predicted_team2_wins: pick.wins2,
+  };
+});
 
     const { error: deleteError } = await supabase
       .from("predictions")
