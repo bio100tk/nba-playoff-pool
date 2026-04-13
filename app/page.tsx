@@ -1,5 +1,6 @@
 import { supabase } from "@/lib/supabase";
 import BracketClient from "./BracketClient";
+import { unstable_noStore as noStore } from "next/cache";
 
 type Team = {
   id: number;
@@ -11,6 +12,7 @@ type Team = {
 };
 
 export default async function Home() {
+  noStore();
   const { data, error } = await supabase.from("teams").select("*");
 
   if (error) {
