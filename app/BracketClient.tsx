@@ -475,6 +475,9 @@ const rows = allSeries.map((series) => {
         <p className="mb-6 text-sm text-slate-600">
           Enter a 4-win result in Round 1 to reveal the next round automatically.
         </p>
+        <p className="mb-4 text-xs text-slate-500">
+           Locked: {String(isLocked)} | Now: {new Date().toString()}
+        </p>
         <SiteNav />
         <input
           placeholder="Your name"
