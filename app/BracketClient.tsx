@@ -368,12 +368,12 @@ function ConferenceBracket({
 export default function BracketClient({
   east,
   west,
+  isLocked,
 }: {
   east: Team[];
   west: Team[];
+  isLocked: boolean;
 }) {
-  const LOCK_TIME = new Date("026-04-19T11:45:00-06:00"); // change this later
-  const isLocked = new Date() > LOCK_TIME;
 
   const [competitorName, setCompetitorName] = useState("");
   const [picks, setPicks] = useState<Record<string, Pick>>({});

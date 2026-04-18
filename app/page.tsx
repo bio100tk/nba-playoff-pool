@@ -13,6 +13,9 @@ type Team = {
 
 export default async function Home() {
   noStore();
+
+  const LOCK_TIME = new Date("2026-04-18T10:45:00-06:00");
+  const isLocked = new Date() > LOCK_TIME;
   const { data, error } = await supabase.from("teams").select("*");
 
   if (error) {
@@ -29,5 +32,5 @@ export default async function Home() {
     .filter((t) => t.conference === "West" && t.seed !== null)
     .sort((a, b) => a.seed! - b.seed!);
 
-  return <BracketClient east={east} west={west} />;
+return <BracketClient east={east} west={west} isLocked={isLocked} />;
 }
